@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import { useState } from "react";
 import axios from "axios";
 
-export default function NewProduct() {
+export default function ProductForm() {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [price, setPrice] = useState("");
