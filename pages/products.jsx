@@ -26,19 +26,25 @@ export default function Products() {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product.title} className="bg-purple-100 bg-opacity-10">
-                <td className="p-2">{product.title}</td>
-                <td className="p-2">
-                  <Link href={`/products/edit/${product._id}`}>
-                    <div className="bg-yellow-400 text-black rounded-md w-fit p-2 px-4 flex justify-center gap-2 items-center">
-                      <RxPencil1 />
-                      <p>Edit</p>
-                    </div>
-                  </Link>
-                </td>
+            {products.length > 0 ? (
+              products.map((product) => (
+                <tr key={product.title} className="bg-purple-100 bg-opacity-10">
+                  <td className="p-2">{product.title}</td>
+                  <td className="p-2">
+                    <Link href={`/products/edit/${product._id}`}>
+                      <div className="bg-yellow-400 text-black rounded-md w-fit p-2 px-4 flex justify-center gap-2 items-center">
+                        <RxPencil1 />
+                        <p>Edit</p>
+                      </div>
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td>Loading</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
 

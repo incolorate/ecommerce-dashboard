@@ -13,6 +13,10 @@ export default async function product(req, res) {
       res.json(await Product.find());
     }
   }
+  if (method === "PUT") {
+    const { title, description, price, _id } = req.body;
+    await Product.updateOne({ _id }, { title, description, price });
+  }
   if (method === "POST") {
     const { title, description, price } = req.body;
     const productData = await Product.create({
@@ -20,6 +24,6 @@ export default async function product(req, res) {
       description,
       price,
     });
-    res.json("productData");
+    res.json(productData);
   }
 }
