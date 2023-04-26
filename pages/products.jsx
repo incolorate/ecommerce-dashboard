@@ -3,7 +3,7 @@ import Link from "next/link";
 import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
 
-import { RxPencil1 } from "react-icons/rx";
+import { RxPencil1, RxTrash } from "react-icons/rx";
 import axios from "axios";
 
 export default function Products() {
@@ -26,25 +26,25 @@ export default function Products() {
             </tr>
           </thead>
           <tbody>
-            {products.length > 0 ? (
-              products.map((product) => (
-                <tr key={product.title} className="bg-purple-100 bg-opacity-10">
-                  <td className="p-2">{product.title}</td>
-                  <td className="p-2">
-                    <Link href={`/products/edit/${product._id}`}>
-                      <div className="bg-yellow-400 text-black rounded-md w-fit p-2 px-4 flex justify-center gap-2 items-center">
-                        <RxPencil1 />
-                        <p>Edit</p>
-                      </div>
-                    </Link>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td>Loading</td>
+            {products.map((product) => (
+              <tr key={product.title} className="bg-purple-100 bg-opacity-10">
+                <td className="p-2">{product.title}</td>
+                <td className="p-2 flex gap-4">
+                  <Link href={`/products/edit/${product._id}`}>
+                    <div className="bg-yellow-400 text-black rounded-md w-fit p-1 px-4 flex justify-center gap-2 items-center">
+                      <RxPencil1 />
+                      <p>Edit</p>
+                    </div>
+                  </Link>
+                  <Link href={`/products/delete/${product._id}`}>
+                    <div className="bg-red-600 text-white rounded-md w-fit p-1 px-4 flex justify-center gap-2 items-center">
+                      <RxTrash />
+                      <p>Delete</p>
+                    </div>
+                  </Link>
+                </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
 

@@ -14,6 +14,10 @@ export default function ProductForm({
   );
   const [price, setPrice] = useState(existingPrice || "");
   const router = useRouter();
+  const navigate = () => {
+    router.push(`/products`);
+  };
+
   const handleProduct = async (e) => {
     e.preventDefault();
     const product = {
@@ -53,7 +57,10 @@ export default function ProductForm({
           className="max-w-md rounded-md bg-slate-100 text-black p-2"
         />
         <div className="w-80 flex gap-2">
-          <button className="p-2 px-4 bg-yellow-400 rounded-md mt-4 text-black">
+          <button
+            onClick={navigate}
+            className="p-2 px-4 bg-yellow-400 rounded-md mt-4 text-black"
+          >
             Create
           </button>
         </div>

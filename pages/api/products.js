@@ -26,4 +26,10 @@ export default async function product(req, res) {
     });
     res.json(productData);
   }
+  if (method === "DELETE") {
+    console.log("hi");
+    if (req.query?.id) {
+      res.json(await Product.deleteOne({ _id: req.query.id }));
+    }
+  }
 }
