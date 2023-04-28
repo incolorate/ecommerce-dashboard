@@ -7,11 +7,13 @@ export default function ProductForm({
   title,
   description,
   price: existingPrice,
+  images,
 }) {
   const [productName, setProductName] = useState(title || "");
   const [productDescription, setProductDescription] = useState(
     description || ""
   );
+
   const [price, setPrice] = useState(existingPrice || "");
   const router = useRouter();
   const navigate = () => {
@@ -32,6 +34,18 @@ export default function ProductForm({
     }
   };
 
+  const updateImage = async (e) => {
+    const files = e.target?.files;
+    if (files?.length > 0) {
+      const data = new FormData();
+      for (const file of files) {
+        data.append("file", file);
+      }
+      const res = await axios.post("/api/upload", data);
+      console.log(res);
+    }
+  };
+
   return (
     <div>
       <h2 className="text-2xl mb-4">{action}:</h2>
@@ -48,6 +62,17 @@ export default function ProductForm({
           value={productDescription}
           className="max-w-md h-36 rounded-md bg-slate-100 text-black p-2"
         />
+        <label>Photos</label>
+
+        <div>
+          <div className="mb-2 bg-blue-600 p-2 px-4 rounded-xl w-32">
+            <label className="flex justify-center cursor-pointer">
+              Upload
+              <input type="file" className="hidden" onChange={updateImage} />
+            </label>
+          </div>
+          {!images?.length && <div>No images</div>}
+        </div>
         <label>Price:</label>
         <input
           onChange={(e) => setPrice(e.target.value)}

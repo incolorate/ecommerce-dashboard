@@ -1,8 +1,6 @@
-import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
-
 import { RxPencil1, RxTrash } from "react-icons/rx";
 import axios from "axios";
 
