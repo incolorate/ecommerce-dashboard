@@ -27,6 +27,7 @@ export default function ProductForm({
       title: productName,
       description: productDescription,
       price,
+      images,
     };
     if (_id) {
       await axios.put(`/api/products`, { ...product, _id });
