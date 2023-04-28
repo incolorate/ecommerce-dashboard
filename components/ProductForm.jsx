@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import SortableList, { SortableItem } from "react-easy-sort";
+import arrayMove from "array-move";
 import axios from "axios";
 export default function ProductForm({
   _id,
@@ -50,6 +52,9 @@ export default function ProductForm({
     }
   };
 
+  const onSortEnd = (oldIndex, newIndex) => {
+    setImages((array) => arrayMove(array, oldIndex, newIndex));
+  };
   return (
     <div>
       <h2 className="text-2xl mb-4">{action}:</h2>
@@ -70,14 +75,26 @@ export default function ProductForm({
 
         <div>
           <div className="flex gap-2 mb-2">
-            {!!images?.length &&
-              images.map((link) => {
-                return (
-                  <div key={link} className="h-24 w-24">
-                    <img src={link} alt="product-image" className="h-full" />
-                  </div>
-                );
-              })}
+            <SortableList
+              className="flex gap-2 mb-2 select-none"
+              onSortEnd={onSortEnd}
+              draggedItemClassName="dragged"
+            >
+              {!!images?.length &&
+                images.map((link) => {
+                  return (
+                    <SortableItem key={link}>
+                      <div className="w-24 h-full cursor-grab flex justify-center align-middle m-2 select-none">
+                        <img
+                          src={link}
+                          alt="product-image"
+                          className="select-none rounded-lg drag"
+                        />
+                      </div>
+                    </SortableItem>
+                  );
+                })}
+            </SortableList>
           </div>
           <div className="mb-2 bg-blue-600 p-2 px-4 rounded-xl w-32">
             <label className="flex justify-center cursor-pointer">
