@@ -17,8 +17,12 @@ export default async function handle(req, res) {
     res.json(categoryDoc);
   }
   if (method === "PUT") {
-    console.log(req.body);
     const { name, id: _id } = req.body;
     await Category.updateOne({ _id }, { name });
+  }
+  if (method === "DELETE") {
+    if (req.query?.id) {
+      res.json(await Category.deleteOne({ _id: req.query.id }));
+    }
   }
 }
