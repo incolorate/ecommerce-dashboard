@@ -3,15 +3,20 @@ import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
 import { RxPencil1, RxTrash } from "react-icons/rx";
 import axios from "axios";
+import Skeleton from "react-loading-skeleton";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/products`).then((response) => {
+    populateProducts();
+  }, []);
+
+  const populateProducts = async () => {
+    await axios.get(`/api/products`).then((response) => {
       setProducts(response.data);
     });
-  }, []);
+  };
 
   return (
     <div>

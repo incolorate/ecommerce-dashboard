@@ -7,6 +7,7 @@ import {
 } from "react-icons/rx";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { BiCategory } from "react-icons/bi";
 
 export default function Nav() {
   const inactive = "flex gap-2 items-center p-2";
@@ -33,6 +34,13 @@ export default function Nav() {
         >
           <RxDesktop className="text-2xl text-center" />
           <p className="text-2xl text-center">Products</p>
+        </Link>
+        <Link
+          href="/categories"
+          className={pathname.includes("categories") ? active : inactive}
+        >
+          <BiCategory className="text-2xl text-center" />
+          <p className="text-2xl text-center">Categories</p>
         </Link>
         <Link
           href="/settings"
