@@ -25,6 +25,7 @@ export default function Products() {
           <thead className="bg-purple-100 text-black">
             <tr>
               <td>Products</td>
+              <td>Category</td>
               <td></td>
             </tr>
           </thead>
@@ -32,6 +33,7 @@ export default function Products() {
             {products.map((product) => (
               <tr key={product.title} className="bg-purple-100 bg-opacity-10">
                 <td className="p-2">{product.title}</td>
+                <td>{product.category}</td>
                 <td className="p-2 flex gap-4">
                   <Link href={`/products/edit/${product._id}`}>
                     <div className="bg-yellow-400 text-black rounded-md w-fit p-1 px-4 flex justify-center gap-2 items-center">

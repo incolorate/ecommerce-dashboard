@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SortableList, { SortableItem } from "react-easy-sort";
 import arrayMove from "array-move";
 import axios from "axios";
+
 export default function ProductForm({
   _id,
   action,
@@ -30,6 +31,7 @@ export default function ProductForm({
       description: productDescription,
       price,
       images,
+      category: selectedCategory,
     };
     if (_id) {
       await axios.put(`/api/products`, { ...product, _id });
@@ -55,6 +57,22 @@ export default function ProductForm({
   const onSortEnd = (oldIndex, newIndex) => {
     setImages((array) => arrayMove(array, oldIndex, newIndex));
   };
+
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+
+  const updateCategory = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  useEffect(() => {
+    updateCategoryList();
+  }, []);
+
+  const updateCategoryList = () => {
+    axios.get("/api/category").then((result) => setCategories(result.data));
+  };
+
   return (
     <div>
       <h2 className="text-2xl mb-4">{action}:</h2>
@@ -65,6 +83,16 @@ export default function ProductForm({
           value={productName}
           className="max-w-md rounded-md bg-slate-100 text-black p-2"
         />
+        <label>Category</label>
+        <select className="text-black max-w-md" onChange={updateCategory}>
+          {categories.map((category) => {
+            return (
+              <option value={category.name} key={category.name}>
+                {category.name}
+              </option>
+            );
+          })}
+        </select>
         <label>Description:</label>
         <input
           onChange={(e) => setProductDescription(e.target.value)}

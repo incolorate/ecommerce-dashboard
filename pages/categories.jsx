@@ -10,6 +10,7 @@ export default function Categories() {
   useEffect(() => {
     updateCategoryList();
   }, []);
+
   const updateCategoryList = () => {
     axios.get("api/category").then((result) => setCategories(result.data));
   };
@@ -20,7 +21,6 @@ export default function Categories() {
     setCategory("");
     updateCategoryList();
   };
-  console.log(categories);
   return (
     <div>
       <Layout>
