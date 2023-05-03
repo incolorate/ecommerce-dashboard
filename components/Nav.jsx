@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { BiCategory } from "react-icons/bi";
+import { signOut } from "next-auth/react";
 
 export default function Nav() {
   const inactive = "flex gap-2 items-center p-2";
@@ -42,13 +43,14 @@ export default function Nav() {
           <BiCategory className="text-2xl text-center" />
           <p className="text-2xl text-center">Categories</p>
         </Link>
-        <Link
+        <button
           href="/settings"
-          className={pathname.includes("settings") ? active : inactive}
+          className="flex gap-2 items-center p-2"
+          onClick={() => signOut()}
         >
           <RxCode className="text-2xl text-center" />
-          <p className="text-2xl text-center">Settings</p>
-        </Link>
+          <p className="text-2xl text-center">Sign out</p>
+        </button>
       </nav>
     </div>
   );
