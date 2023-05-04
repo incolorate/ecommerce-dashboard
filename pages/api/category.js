@@ -1,5 +1,6 @@
 import { Category } from "../../lib/models/Categories";
 import { mongooseConnect } from "../../lib/mongoose";
+import Nextauth from "./auth/[...nextauth]";
 
 export default async function handle(req, res) {
   const { method } = req;
